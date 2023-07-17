@@ -45,15 +45,20 @@ export default function PostList() {
     return (
         <>
             <h1 style={{ textAlign: "center" }}>Post</h1>
-            {/* <button style={{display:"block",margin:"auto"}} onClick={getTheData}>Get the Data</button> */}
             <div>
                 {data.map((el) => <Post {...el} />)}
             </div>
-            <div style={{ width: "10%", margin: "10px auto" }}>
+            <div style={{ width: "35%", margin: "10px auto" }}>
                 <button disabled={page <= 1} onClick={() => setPage(page - 1)}>prev</button>
-                <button>{page}</button>
-                <button disabled={Math.ceil(dataLength / 7) <= page} onClick={() => setPage(page + 1)}>Next {dataLength}</button>
+
+                {new Array(Math.ceil(dataLength / 7)).fill(0).map((el, i) => {
+                    return <button key={i} onClick={(e) => setPage(e.target.textContent)}>{i + 1}</button>
+                })}
+
+                <button disabled={Math.ceil(dataLength / 7) <= page} onClick={() => setPage(page + 1)}>Next</button>
+
             </div>
+            <h3 style={{ textAlign: "right", marginRight: "40px" }}>{"Page no : " + page}</h3>
 
         </>
 
